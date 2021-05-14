@@ -1,6 +1,6 @@
 ---
 - name: Install Java 1.8
-  yum: name=http://toolchain.phillyair.com:8081/artifactory/ext-release-local/jdk-8u121-linux-x64.rpm state=present
+  yum: name=http://nexus.apps.prod.croftvillas.com/repository/ext-release-local/jdk-8u121-linux-x64.rpm state=present
 
 - name: add group "tomcat"
   group: name=tomcat
@@ -10,7 +10,7 @@
   sudo: True
 
 - name: Download Tomcat
-  get_url: url=http://toolchain.phillyair.com:8081/artifactory/ext-release-local/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
+  get_url: url=http://nexus.apps.prod.croftvillas.com/repository/ext-release-local/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
 
 - name: Extract archive
   command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/opt/apache-tomcat-7.0.61
