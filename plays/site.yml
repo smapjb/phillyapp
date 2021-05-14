@@ -1,9 +1,8 @@
 ---
 # This playbook deploys a simple standalone Tomcat 7 server. 
 
-- hosts: tomcat-servers 
-  remote_user: root
-  sudo: yes
+- hosts: all 
+  become: yes
   
   vars:
     app_release: 1.0-SNAPSHOT
@@ -27,7 +26,7 @@
       when: phillyapp_stat.stat.exists
     
     - name: Deploy war file from Arty
-      get_url: url=http://toolchain.phillyair.com:8081/artifactory/libs-{{ app_stage }}-local/com/phillyair/phillyapp/{{ app_release }}/phillyapp-{{ app_release }}.war dest=/opt/apache-tomcat-7.0.61/webapps/phillyapp.war  force=yes
+      get_url: url=http://nexus.apps.prod.croftvillas.com/repository/libs-{{ app_stage }}-local/com/phillyair/phillyapp/{{ app_release }}/phillyapp-{{ app_release }}.war dest=/opt/apache-tomcat-7.0.61/webapps/phillyapp.war  force=yes
       register: war_downloaded
 
     - name: Set correct permissions
